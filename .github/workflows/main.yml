@@ -34,32 +34,25 @@ jobs:
       - name: Push Docker Image
         run: bash ci/push-docker.sh
 
-
   Component-test:
     runs-on: ubuntu-latest
     needs: [Linting]
     steps:
-      - name: Download code
-        uses: actions/download-artifact@v4
-        with:
-          name: code
-          path: .
-      - name: Set up Docker credentials
-        run: echo "${{ secrets.docker_password }}" | docker login --username ${{ env.docker_username }} --password-stdin
-      - name: Execute component test
-        run: bash ci/component-test.sh
-
+    - name: Download code
+      uses: actions/download-artifact@v4
+      with:
+        name: code
+        path: .
+    - name: Execute component test
+      run: bash ci/component-test.sh
   Performance-test:
     runs-on: ubuntu-latest
     needs: [Linting]
     steps:
-      - name: Download code
-        uses: actions/download-artifact@v4
-        with:
-          name: code
-          path: .
-      - name: Set up Docker credentials
-        run: echo "${{ secrets.docker_password }}" | docker login --username ${{ env.docker_username }} --password-stdin
-      - name: Execute performance test
-        run: bash ci/performance-test.sh
-
+    - name: Download code
+      uses: actions/download-artifact@v4
+      with:
+        name: code
+        path: .
+    - name: Execute performance test
+      run: bash ci/performance-test.sh
