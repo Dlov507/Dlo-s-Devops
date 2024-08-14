@@ -4,6 +4,8 @@ env:
   docker_username: dlov507 
   docker_password: ${{ secrets.GITHUB_TOKEN }} 
   GIT_COMMIT: ${{ github.sha }}
+permissions:
+  packages: write
 jobs:
   Build:
     runs-on: ubuntu-latest
